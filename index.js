@@ -2,7 +2,8 @@ const app = require("express")();
 const http = require("http").Server(app);
 const port = process.env.PORT || 3000;
 const path = require('path');
-const io = require('socket.io')(http);
+const Lobby = require('./classes/lobby');
+
 
 //routes
 var homeRouter = require('./routes/home');
@@ -14,15 +15,10 @@ app.set('view engine', 'jade');
 //routes entry points
 app.use('/',homeRouter)
 
-// socket logic 
-io.on("connection",(socket)=>{
-    console.log(socket);
+// socket logic
+new Lobby().setUp(http);  
 
-    //client sent message
-    socket.on("message",(message)=>{
-        console.log(message);
-    })
-})
+
 
 
 //server start
