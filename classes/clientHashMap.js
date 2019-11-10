@@ -31,22 +31,24 @@ class ClientHashMap{
          }
          this.size++;
          console.log(client.key+" added!!!")
+         console.log(this.map_array) 
         
 
     }
     remove(socket_id)
     {
-        if(!socket_id)
-        {
-            return;
-        }
-        var removed=false;
+       
+        var removed;
         var key = socket_id.charCodeAt(0);
         var mod = key % this.modulus;
         var pointer = this.map_array[mod];
 
-        if (pointer.socket_id == socket_id) {
-            pointer = pointer.next;
+        if(pointer==null)
+        {
+            removed = false;
+        }
+        else if (pointer.socket_id == socket_id) {
+            this.map_array[mod] = pointer.next;
             removed = true;
         } else {
             while(pointer!=null)
@@ -63,11 +65,10 @@ class ClientHashMap{
 
         if (removed)
         {
-                console.log("goodbye bitch");
+              console.log("removed"+ key); 
+              console.log(this.map_array) 
         }
-        else{
-            console.log("couldn't remove that asshole");
-        }
+        
 
     }
     isFull()

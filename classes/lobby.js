@@ -11,7 +11,7 @@ class Lobby{
                 this.clients.add(new Client(username,socket));
                // console.log(this.clients);
             });
-            socket.on("disconnect",(socket)=>{
+            socket.on("disconnect",(data)=>{
              this.clients.remove(socket.id);
             });
         });
