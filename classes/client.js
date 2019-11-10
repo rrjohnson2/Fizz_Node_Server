@@ -1,8 +1,9 @@
 class Client{
-    constructor(id,socket)
+    constructor(username,socket)
     {
-        this.id=id;
-        this.socket=socket;
+        this.username=username;
+        this.socket_id= socket.id;
+        this.key= this.socket_id.charCodeAt(0);
         this.next =null;
     }
 }

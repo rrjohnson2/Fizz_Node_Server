@@ -7,9 +7,12 @@ class Lobby{
         this.clients= new ClientHashMap();
 
         this.io.on("connection",(socket)=>{
-            socket.on("join",(id)=>{
-                this.clients.add(new Client(id,socket));
-                console.log(this.clients);
+            socket.on("join",(username)=>{
+                this.clients.add(new Client(username,socket));
+               // console.log(this.clients);
+            });
+            socket.on("disconnect",(socket)=>{
+             this.clients.remove(socket.id);
             });
         });
     }

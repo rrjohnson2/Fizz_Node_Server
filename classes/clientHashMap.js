@@ -3,7 +3,7 @@ class ClientHashMap{
     {
         this.map_array=[];
         this.size = 0;
-        this.capacity=4;
+        this.capacity=10;
         this.modulus =10;
     }
     add(client)
@@ -14,7 +14,7 @@ class ClientHashMap{
             return;
         }
 
-        var mod = client.id % this.modulus;
+        var mod = client.key  % this.modulus;
 
          if(this.map_array[mod] ==null)
          {
@@ -30,16 +30,44 @@ class ClientHashMap{
             pointer.next = client;
          }
          this.size++;
-         console.log(client.id +" added!!!")
+         console.log(client.key+" added!!!")
         
 
     }
-    remove(client)
+    remove(socket_id)
     {
+        if(!socket_id)
+        {
+            return;
+        }
+        var removed=false;
+        var key = socket_id.charCodeAt(0);
+        var mod = key % this.modulus;
+        var pointer = this.map_array[mod];
 
-    }
-    find(id)
-    {
+        if (pointer.socket_id == socket_id) {
+            pointer = pointer.next;
+            removed = true;
+        } else {
+            while(pointer!=null)
+            {
+                var next = pointer.next;
+                if(next.socket_id == socket_id)
+                {
+                    next = next.next;
+                    break;
+                }
+            }   
+            removed = true;
+        }
+
+        if (removed)
+        {
+                console.log("goodbye bitch");
+        }
+        else{
+            console.log("couldn't remove that asshole");
+        }
 
     }
     isFull()
