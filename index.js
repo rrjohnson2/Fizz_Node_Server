@@ -16,7 +16,7 @@ app.set('view engine', 'jade');
 app.use('/',homeRouter)
 
 // socket logic
-new Lobby().setUp(http);  
+new Lobby(http);  
 
 
 

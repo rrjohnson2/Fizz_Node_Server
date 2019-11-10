@@ -1,15 +1,16 @@
-class Lobby{
-      setUp(http) {
-        this.io= require('socket.io')(http);
-        
-        this.io.on("connection",(socket)=>{
+const Client = require('./client');
+const ClientHashMap = require("./clientHashMap");
 
-            //client sent message
-            socket.on("join",(message)=>{
-                console.log(message);
-            })
-        
-            console.log("a user is connecting");
+class Lobby{
+    constructor(http) {
+        this.io= require('socket.io')(http);
+        this.clients= new ClientHashMap();
+
+        this.io.on("connection",(socket)=>{
+            socket.on("join",(id)=>{
+                this.clients.add(new Client(id,socket));
+                console.log(this.clients);
+            });
         });
     }
 }
