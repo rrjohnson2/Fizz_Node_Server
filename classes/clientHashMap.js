@@ -1,3 +1,4 @@
+const axios = require('axios')
 class ClientHashMap{
     constructor()
     {
@@ -5,6 +6,9 @@ class ClientHashMap{
         this.size = 0;
         this.capacity=10;
         this.modulus =10;
+        this.host = "http://localhost:8080";
+        this.add_client_path="/clientActivated";
+        this.remove_client_path = "/clientDeactivated";
     }
     add(client)
     {
@@ -31,7 +35,12 @@ class ClientHashMap{
          }
          this.size++;
          console.log(client.key+" added!!!")
-         console.log(this.map_array) 
+         
+         axios.post(this.host+this.add_client_path,
+            {
+                username: client.username,
+                key: client.key
+            });
         
 
     }
@@ -42,12 +51,14 @@ class ClientHashMap{
         var key = socket_id.charCodeAt(0);
         var mod = key % this.modulus;
         var pointer = this.map_array[mod];
+        var username;
 
         if(pointer==null)
         {
             removed = false;
         }
         else if (pointer.socket_id == socket_id) {
+            username = pointer.username;
             this.map_array[mod] = pointer.next;
             removed = true;
         } else {
@@ -56,17 +67,21 @@ class ClientHashMap{
                 var next = pointer.next;
                 if(next.socket_id == socket_id)
                 {
+                    username = next.username;
                     next = next.next;
+                    removed = true;
                     break;
                 }
             }   
-            removed = true;
         }
 
         if (removed)
         {
               console.log("removed"+ key); 
-              console.log(this.map_array) 
+              axios.post(this.host+this.remove_client_path,
+                {
+                    username: username
+                }); 
         }
         
 
