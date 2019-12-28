@@ -3,7 +3,18 @@ const http = require("http").Server(app);
 const port = process.env.PORT || 3000;
 const path = require('path');
 const Lobby = require('./classes/lobby');
+const bodyParser = require('body-parser');
 
+
+
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+
+app.use(bodyParser.json());
+
+// socket logic
+new Lobby(http);  
 
 //routes
 var homeRouter = require('./routes/home');
@@ -15,9 +26,13 @@ app.set('view engine', 'jade');
 //routes entry points
 app.use('/',homeRouter)
 
-// socket logic
-new Lobby(http);  
 
+app.post('/notifications', function(req, res) {
+    console.log(req.body);
+    console.log(req.params);
+
+    res.send();
+  });
 
 
 
