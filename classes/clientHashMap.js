@@ -86,6 +86,23 @@ class ClientHashMap{
         
 
     }
+    find(notice)
+    {
+        
+        var mod = notice.socket_key % this.modulus;
+
+        var pointer = this.map_array[mod];
+
+        while(pointer!=null)
+        {
+            if(pointer.username == notice.username)
+            {
+                return pointer.socket_id;
+            }
+            pointer = pointer.next;
+        }
+        return null;
+    }
     isFull()
     {
         return this.size >= this.capacity;

@@ -16,5 +16,16 @@ class Lobby{
             });
         });
     }
+     sendNotications(notifications) {
+         
+        console.log("sent");
+       for (const index in notifications) {
+          var socket_id = this.clients.find(notifications[index]);
+          this.io.to(socket_id).emit("notice",notifications[index].data);
+          console.log(socket_id);
+       }
+       
+         
+    }
 }
 module.exports=Lobby;

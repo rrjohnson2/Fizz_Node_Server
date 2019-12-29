@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // socket logic
-new Lobby(http);  
+var lobby = new Lobby(http);  
 
 //routes
 var homeRouter = require('./routes/home');
@@ -28,8 +28,8 @@ app.use('/',homeRouter)
 
 
 app.post('/notifications', function(req, res) {
-    console.log(req.body);
-    console.log(req.params);
+  
+    lobby.sendNotications(req.body.notifications);
 
     res.send();
   });
