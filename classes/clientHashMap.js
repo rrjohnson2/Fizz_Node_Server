@@ -4,7 +4,7 @@ class ClientHashMap{
     {
         this.map_array=[];
         this.size = 0;
-        this.capacity=10;
+        this.capacity=10000;
         this.modulus =10;
         this.host = "http://localhost:8080";
         this.add_client_path="/clientActivated";
