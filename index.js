@@ -36,10 +36,8 @@ app.post('/notifications', function(req, res) {
 
 
 
-<<<<<<< HEAD
-=======
+
 //server start
 http.listen(port, function() {
     console.log("Listening on *:" + port);
 });
->>>>>>> 9f46342ba0c4ece7ecf5cee8de34bec404bbd718
