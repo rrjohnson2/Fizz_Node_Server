@@ -36,7 +36,3 @@ app.post('/notifications', function(req, res) {
 
 
 
-//server start
-http.listen(port, function() {
-    console.log("Listening on *:" + port);
-});
