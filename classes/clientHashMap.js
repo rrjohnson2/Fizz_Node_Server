@@ -6,7 +6,7 @@ class ClientHashMap{
         this.size = 0;
         this.capacity=10000;
         this.modulus =10;
-        this.host = "http://localhost:8080";
+        this.host = "http://app-loop-backend.herokuapp.com/";
         this.add_client_path="/clientActivated";
         this.remove_client_path = "/clientDeactivated";
     }
