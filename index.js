@@ -1,6 +1,6 @@
 const app = require("express")();
 const http = require("http").Server(app);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const path = require('path');
 const Lobby = require('./classes/lobby');
 const bodyParser = require('body-parser');
@@ -36,3 +36,10 @@ app.post('/notifications', function(req, res) {
 
 
 
+<<<<<<< HEAD
+=======
+//server start
+http.listen(port, function() {
+    console.log("Listening on *:" + port);
+});
+>>>>>>> 9f46342ba0c4ece7ecf5cee8de34bec404bbd718
