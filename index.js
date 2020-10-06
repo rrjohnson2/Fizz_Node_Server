@@ -1,6 +1,6 @@
 const app = require("express")();
 const http = require("http").Server(app);
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const path = require('path');
 const Lobby = require('./classes/lobby');
 const bodyParser = require('body-parser');
